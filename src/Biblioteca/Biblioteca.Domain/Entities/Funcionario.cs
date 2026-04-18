@@ -18,6 +18,8 @@ public class Funcionario : BaseEntity
     public Guid IdBiblioteca { get; private set; } 
     public Biblioteca Biblioteca { get; private set; }
 
+    protected Funcionario() { }
+    
     public Funcionario(string nome, string email, DateOnly dataNasc, string rawSenha, string turno, Guid idBiblioteca)
     {
         UpdateNome(nome);

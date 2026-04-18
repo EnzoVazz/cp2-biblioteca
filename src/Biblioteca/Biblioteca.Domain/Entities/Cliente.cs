@@ -20,6 +20,8 @@ public class Cliente : BaseEntity
     // 1..N (Um cliente faz vários empréstimos)
     public List<Emprestimo> Emprestimos { get; private set; } = new List<Emprestimo>();
     
+    protected Cliente() { }
+    
     public Cliente(string nome, string email, DateOnly dataNascimento, string rawSenha, Guid idBiblioteca)
     {
         UpdateNome(nome);

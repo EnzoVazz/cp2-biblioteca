@@ -19,6 +19,8 @@ public class Biblioteca : BaseEntity
     public List<Cliente> Clientes { get; private set; } = new List<Cliente>();
     
 
+    protected Biblioteca() { }
+    
     public Biblioteca(string nome, string endereco)
     {
         UpdateNome(nome);

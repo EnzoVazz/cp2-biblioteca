@@ -17,6 +17,8 @@ public class Emprestimo : BaseEntity
     // N..N (Um empréstimo pode conter vários livros)
     public List<Livro> Livros { get; private set; } = new List<Livro>();
     
+    protected Emprestimo() { }
+    
     public Emprestimo(Guid idCliente, DateTime dataEmprestimo)
     {
         IdCliente = idCliente;

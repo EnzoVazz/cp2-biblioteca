@@ -12,6 +12,8 @@ public class Genero : BaseEntity
     // N..N (Um gênero possui vários livros)
     public List<Livro> Livros { get; private set; } = new List<Livro>();
 
+    protected Genero() { }
+    
     public Genero(string nome, string descricao)
     {
         UpdateNome(nome);

@@ -22,6 +22,8 @@ public class Livro : BaseEntity
     // N..N (Um livro pode participar de vários empréstimos ao longo do tempo)
     public List<Emprestimo> Emprestimos { get; private set; } = new List<Emprestimo>();
 
+    protected Livro() { }
+    
     public Livro(string titulo, string serie, string descricao, DateOnly dataLancamento, int nPaginas, Guid idBiblioteca)
     {
         UpdateTitulo(titulo);
