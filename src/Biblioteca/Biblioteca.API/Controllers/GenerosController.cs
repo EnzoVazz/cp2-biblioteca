@@ -15,10 +15,12 @@ namespace Biblioteca.API.Controllers;
 public class GenerosController : ControllerBase
 {
     private readonly IRepository<Genero> _repository;
+    private readonly ILogger<GenerosController> _logger;
 
-    public GenerosController(IRepository<Genero> repository)
+    public GenerosController(IRepository<Genero> repository, ILogger<GenerosController> logger)
     {
         _repository = repository;
+        _logger = logger;
     }
 
     /// <summary>
@@ -74,9 +76,20 @@ public class GenerosController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<GeneroResponse>> Create([FromBody] CreateGeneroRequest request)
     {
+        _logger.LogInformation(
+            "Iniciando cadastro de gênero. {TraceId} {Nome}",
+            HttpContext.TraceIdentifier,
+            request.Nome);
+
         var genero = new Genero(request.Nome, request.Descricao);
         await EnsureNomeUnico(request.Nome);
         await _repository.AddAsync(genero);
+
+        _logger.LogInformation(
+            "Gênero cadastrado com sucesso. {TraceId} {IdGenero} {Nome}",
+            HttpContext.TraceIdentifier,
+            genero.IdGenero,
+            genero.Nome);
 
         var response = GeneroResponse.From(genero);
         return CreatedAtAction(nameof(GetById), new { id = response.IdGenero }, response);

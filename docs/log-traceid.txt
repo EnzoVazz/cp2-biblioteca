@@ -1,0 +1,6 @@
+info: Biblioteca.API.Controllers.GenerosController[0]
+      Iniciando cadastro de gênero. 0HNOLVVN6G3T7:00000001 X
+
+fail: Biblioteca.API.Exceptions.GlobalExceptionHandler[0]
+      Erro não tratado na API. 0HNOLVVN6G3T7:00000001 /api/generos DomainException A descrição deve conter pelo menos 10 caracteres.
+      Biblioteca.Domain.Exceptions.DomainException: A descrição deve conter pelo menos 10 caracteres.

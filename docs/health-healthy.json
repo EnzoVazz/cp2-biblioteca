@@ -1,0 +1,23 @@
+{
+  "status": "Healthy",
+  "totalDurationMs": 1496.96,
+  "checks": [
+    {
+      "name": "self",
+      "status": "Healthy",
+      "durationMs": 1.09,
+      "description": "Processo da API em execução."
+    },
+    {
+      "name": "oracle",
+      "status": "Healthy",
+      "durationMs": 1367.33
+    },
+    {
+      "name": "fiap",
+      "status": "Healthy",
+      "durationMs": 275.74,
+      "description": "FIAP respondeu 200."
+    }
+  ]
+}

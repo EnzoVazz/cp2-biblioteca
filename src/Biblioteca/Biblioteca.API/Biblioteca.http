@@ -1,5 +1,9 @@
 @Biblioteca_HostAddress = http://localhost:5267
 
+### Health check (JSON com self, oracle e fiap)
+GET {{Biblioteca_HostAddress}}/health
+Accept: application/json
+
 ### Lista gêneros
 GET {{Biblioteca_HostAddress}}/api/generos
 Accept: application/json

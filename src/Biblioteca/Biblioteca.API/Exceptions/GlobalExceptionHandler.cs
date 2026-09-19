@@ -23,7 +23,13 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        _logger.LogError(exception, "Erro não tratado na API: {Message}", exception.Message);
+        _logger.LogError(
+            exception,
+            "Erro não tratado na API. {TraceId} {RequestPath} {ExceptionType} {Message}",
+            httpContext.TraceIdentifier,
+            httpContext.Request.Path.ToString(),
+            exception.GetType().Name,
+            exception.Message);
 
         var (statusCode, title, detail) = MapException(exception);
 

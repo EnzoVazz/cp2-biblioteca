@@ -1,0 +1,6 @@
+﻿dotnet test src/Biblioteca/Biblioteca.sln
+
+Aprovado!  – Com falha: 0, Aprovado: 12, Ignorado: 0, Total: 12, Duração: 257 ms - Biblioteca.Domain.Tests.dll (net10.0)
+Aprovado!  – Com falha: 0, Aprovado:  2, Ignorado: 0, Total:  2, Duração: 485 ms - Biblioteca.Application.Tests.dll (net10.0)
+
+14 testes no total (Domain: Fact + Theory em Genero e Livro; Application: mock de IRepository no cadastro de livro).

@@ -3,7 +3,6 @@ using Biblioteca.Application.Interfaces;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
-using BibliotecaEntity = Biblioteca.Domain.Entities.Biblioteca;
 
 namespace Biblioteca.API.Controllers;
 
@@ -16,14 +15,17 @@ namespace Biblioteca.API.Controllers;
 public class LivrosController : ControllerBase
 {
     private readonly IRepository<Livro> _livroRepository;
-    private readonly IRepository<BibliotecaEntity> _bibliotecaRepository;
+    private readonly ILivroAppService _livroAppService;
+    private readonly ILogger<LivrosController> _logger;
 
     public LivrosController(
         IRepository<Livro> livroRepository,
-        IRepository<BibliotecaEntity> bibliotecaRepository)
+        ILivroAppService livroAppService,
+        ILogger<LivrosController> logger)
     {
         _livroRepository = livroRepository;
-        _bibliotecaRepository = bibliotecaRepository;
+        _livroAppService = livroAppService;
+        _logger = logger;
     }
 
     /// <summary>
@@ -79,20 +81,20 @@ public class LivrosController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<LivroResponse>> Create([FromBody] CreateLivroRequest request)
     {
-        var livro = new Livro(
+        _logger.LogInformation(
+            "Iniciando cadastro de livro. {TraceId} {Titulo} {IdBiblioteca}",
+            HttpContext.TraceIdentifier,
             request.Titulo,
-            request.Serie,
-            request.Descricao,
-            request.DataLancamento,
-            request.NPaginas,
             request.IdBiblioteca);
 
-        if (!await _bibliotecaRepository.ExistsByIdAsync(request.IdBiblioteca))
-            throw new ResourceNotFoundException("Biblioteca", request.IdBiblioteca);
+        var response = await _livroAppService.CreateAsync(request);
 
-        await _livroRepository.AddAsync(livro);
+        _logger.LogInformation(
+            "Livro cadastrado com sucesso. {TraceId} {IdLivro} {Titulo}",
+            HttpContext.TraceIdentifier,
+            response.IdLivro,
+            response.Titulo);
 
-        var response = LivroResponse.From(livro);
         return CreatedAtAction(nameof(GetById), new { id = response.IdLivro }, response);
     }
 }
