@@ -1,0 +1,8 @@
+{
+  "type": "https://httpstatuses.io/404",
+  "title": "Recurso não encontrado",
+  "status": 404,
+  "detail": "Gênero '00000000-0000-0000-0000-000000000001' não foi encontrado.",
+  "instance": "/api/generos/00000000-0000-0000-0000-000000000001",
+  "traceId": "00-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-bbbbbbbbbbbbbbbb-00"
+}

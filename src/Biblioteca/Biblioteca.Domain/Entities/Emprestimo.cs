@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Common;
+using Biblioteca.Domain.Exceptions;
 
 namespace Biblioteca.Domain.Entities;
 
@@ -24,7 +25,7 @@ public class Emprestimo : BaseEntity
         IdCliente = idCliente;
         
         if (dataEmprestimo > DateTime.Now)
-            throw new Exception("A data de empréstimo não pode ser no futuro.");
+            throw new DomainException("A data de empréstimo não pode ser no futuro.");
         
         DataEmprestimo = dataEmprestimo;
     }
@@ -32,7 +33,7 @@ public class Emprestimo : BaseEntity
     public void RegistrarDevolucao(DateTime dataDevolucao)
     {
         if (dataDevolucao < DataEmprestimo)
-            throw new Exception("A data de devolução não pode ser anterior à data de empréstimo.");
+            throw new DomainException("A data de devolução não pode ser anterior à data de empréstimo.");
         
         DataDevolucao = dataDevolucao;
     }

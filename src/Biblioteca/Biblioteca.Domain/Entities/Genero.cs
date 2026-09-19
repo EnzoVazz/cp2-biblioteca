@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Common;
+using Biblioteca.Domain.Exceptions;
 
 namespace Biblioteca.Domain.Entities;
 
@@ -23,7 +24,7 @@ public class Genero : BaseEntity
     public void UpdateNome(string nome)
     {
         if (string.IsNullOrWhiteSpace(nome))
-            throw new Exception("O nome do gênero não pode ser vazio.");
+            throw new DomainException("O nome do gênero não pode ser vazio.");
         
         Nome = nome.Trim();
     }
@@ -31,7 +32,7 @@ public class Genero : BaseEntity
     public void UpdateDescricao(string descricao)
     {
         if (string.IsNullOrWhiteSpace(descricao) || descricao.Length < 10)
-            throw new Exception("A descrição deve conter pelo menos 10 caracteres.");
+            throw new DomainException("A descrição deve conter pelo menos 10 caracteres.");
         
         Descricao = descricao.Trim();
     }

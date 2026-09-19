@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Common;
+using Biblioteca.Domain.Exceptions;
 
 namespace Biblioteca.Domain.Entities;
 
@@ -30,7 +31,7 @@ public class Biblioteca : BaseEntity
     public void UpdateNome(string nome)
     {
         if (string.IsNullOrWhiteSpace(nome))
-            throw new Exception("O nome da biblioteca não pode ser vazio.");
+            throw new DomainException("O nome da biblioteca não pode ser vazio.");
         
         Nome = nome.Trim();
     }
@@ -38,7 +39,7 @@ public class Biblioteca : BaseEntity
     public void UpdateEndereco(string endereco)
     {
         if (string.IsNullOrWhiteSpace(endereco) || endereco.Length < 5)
-            throw new Exception("Endereço inválido. Deve conter pelo menos 5 caracteres.");
+            throw new DomainException("Endereço inválido. Deve conter pelo menos 5 caracteres.");
         
         Endereco = endereco;
     }

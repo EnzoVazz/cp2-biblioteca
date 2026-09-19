@@ -1,0 +1,8 @@
+{
+  "type": "https://httpstatuses.io/400",
+  "title": "Regra de negócio violada",
+  "status": 400,
+  "detail": "A descrição deve conter pelo menos 10 caracteres.",
+  "instance": "/api/generos",
+  "traceId": "00-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-bbbbbbbbbbbbbbbb-00"
+}

@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Common;
+using Biblioteca.Domain.Exceptions;
 
 namespace Biblioteca.Domain.Entities;
 
@@ -31,7 +32,7 @@ public class Livro : BaseEntity
         UpdateDescricao(descricao);
         
         if (dataLancamento > DateOnly.FromDateTime(DateTime.Today))
-            throw new Exception("A data de lançamento não pode ser no futuro.");
+            throw new DomainException("A data de lançamento não pode ser no futuro.");
         DataLancamento = dataLancamento;
 
         UpdateNPaginas(nPaginas);
@@ -42,7 +43,7 @@ public class Livro : BaseEntity
     public void UpdateTitulo(string titulo)
     {
         if (string.IsNullOrWhiteSpace(titulo))
-            throw new Exception("O título do livro não pode ser vazio.");
+            throw new DomainException("O título do livro não pode ser vazio.");
         
         Titulo = titulo.Trim();
     }
@@ -50,7 +51,7 @@ public class Livro : BaseEntity
     public void UpdateDescricao(string descricao)
     {
         if (string.IsNullOrWhiteSpace(descricao))
-            throw new Exception("A descrição do livro não pode ser vazia.");
+            throw new DomainException("A descrição do livro não pode ser vazia.");
         
         Descricao = descricao.Trim();
     }
@@ -58,7 +59,7 @@ public class Livro : BaseEntity
     public void UpdateNPaginas(int nPaginas)
     {
         if (nPaginas <= 0)
-            throw new Exception("O número de páginas deve ser maior que zero.");
+            throw new DomainException("O número de páginas deve ser maior que zero.");
         
         NPaginas = nPaginas;
     }

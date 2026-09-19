@@ -1,6 +1,31 @@
 @Biblioteca_HostAddress = http://localhost:5267
 
-GET {{Biblioteca_HostAddress}}/weatherforecast/
+### Lista gêneros
+GET {{Biblioteca_HostAddress}}/api/generos
 Accept: application/json
 
-###
+### Busca gênero inexistente (espera 404 em ProblemDetails)
+GET {{Biblioteca_HostAddress}}/api/generos/00000000-0000-0000-0000-000000000001
+Accept: application/json
+
+### Cria gênero
+POST {{Biblioteca_HostAddress}}/api/generos
+Content-Type: application/json
+
+{
+  "nome": "Fantasia",
+  "descricao": "Narrativas com elementos mágicos e mundos imaginários."
+}
+
+### Cria biblioteca
+POST {{Biblioteca_HostAddress}}/api/bibliotecas
+Content-Type: application/json
+
+{
+  "nome": "Biblioteca Central",
+  "endereco": "Av. Paulista, 1000 - São Paulo"
+}
+
+### Lista bibliotecas
+GET {{Biblioteca_HostAddress}}/api/bibliotecas
+Accept: application/json

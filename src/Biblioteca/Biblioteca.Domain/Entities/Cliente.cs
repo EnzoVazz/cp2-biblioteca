@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Common;
+using Biblioteca.Domain.Exceptions;
 using Biblioteca.Domain.Helpers;
 
 namespace Biblioteca.Domain.Entities;
@@ -34,7 +35,7 @@ public class Cliente : BaseEntity
     public void UpdateNome(string novoNome)
     {
         if (string.IsNullOrWhiteSpace(novoNome))
-            throw new Exception("Nome não pode ser vazio.");
+            throw new DomainException("Nome não pode ser vazio.");
         
         Nome = novoNome;
     }
@@ -42,7 +43,7 @@ public class Cliente : BaseEntity
     public void UpdateEmail(string novoEmail)
     {
         if (string.IsNullOrWhiteSpace(novoEmail) || !novoEmail.Contains("@"))
-            throw new Exception("E-mail inválido.");
+            throw new DomainException("E-mail inválido.");
         Email = novoEmail;
     }
     
@@ -50,14 +51,14 @@ public class Cliente : BaseEntity
     {
         var idade = CalculaIdade(novaDataNascimento);
         if (idade < 18)
-            throw new Exception("O cliente deve ter mais que 18 anos.");
+            throw new DomainException("O cliente deve ter mais que 18 anos.");
         DataNascimento = novaDataNascimento;
     }
     
     public void MudarSenha(string novaSenha)
     {
         if (string.IsNullOrWhiteSpace(novaSenha) || novaSenha.Length < 6)
-            throw new Exception("A senha deve conter pelo menos 6 caracteres.");
+            throw new DomainException("A senha deve conter pelo menos 6 caracteres.");
         Salt = Guid.NewGuid().ToString("N");
         
         Senha = HashHelper.Hash(novaSenha, Salt);
